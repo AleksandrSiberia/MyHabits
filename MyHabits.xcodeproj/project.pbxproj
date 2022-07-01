@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0E16E0286F07C600B7168C /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E16DF286F07C600B7168C /* ColorView.swift */; };
 		8B49D61C286D771700990470 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49D61B286D771700990470 /* AppDelegate.swift */; };
 		8B49D61E286D771700990470 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49D61D286D771700990470 /* SceneDelegate.swift */; };
 		8B49D620286D771700990470 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49D61F286D771700990470 /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B0E16DF286F07C600B7168C /* ColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
 		8B49D618286D771700990470 /* MyHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B49D61B286D771700990470 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B49D61D286D771700990470 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				8B49D631286D850400990470 /* HabitsStore.swift */,
 				8B49D633286D85E300990470 /* HabitsViewController.swift */,
 				8B49D637286EC84500990470 /* HabitViewController.swift */,
+				8B0E16DF286F07C600B7168C /* ColorView.swift */,
 				8B49D635286D867B00990470 /* InfoViewController.swift */,
 				8B49D624286D771800990470 /* Assets.xcassets */,
 				8B49D626286D771800990470 /* LaunchScreen.storyboard */,
@@ -154,6 +157,7 @@
 				8B49D620286D771700990470 /* ViewController.swift in Sources */,
 				8B49D638286EC84500990470 /* HabitViewController.swift in Sources */,
 				8B49D61C286D771700990470 /* AppDelegate.swift in Sources */,
+				8B0E16E0286F07C600B7168C /* ColorView.swift in Sources */,
 				8B49D634286D85E300990470 /* HabitsViewController.swift in Sources */,
 				8B49D636286D867B00990470 /* InfoViewController.swift in Sources */,
 				8B49D61E286D771700990470 /* SceneDelegate.swift in Sources */,
@@ -302,6 +306,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -329,6 +334,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
