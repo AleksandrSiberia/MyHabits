@@ -10,29 +10,37 @@ import UIKit
 
 class HabitViewController: UIViewController {
 
-    private lazy var nameNewHabit: String = {
-        return ""
+    private lazy var nameNewHabit: String? = {
+        var nameNewHabit: String?
+        return nameNewHabit
+    }()
+
+    private lazy var dateNewHabit: Date? = {
+        var dateNewHabit: Date?
+        return dateNewHabit
     }()
 
     private lazy var buttonNavRight: UIBarButtonItem = {
-        var buttonNavRight = UIBarButtonItem( title: "Сохранить", style: .bordered, target: self, action: #selector(actionButtonNavRight))
+        var buttonNavRight = UIBarButtonItem( title: "Сохранить", style: .plain, target: self, action: #selector(actionButtonNavRight))
         return buttonNavRight
     }()
 
     private lazy var labelNameHabit: UILabel = {
         var labelNameHabit = UILabel()
         labelNameHabit.translatesAutoresizingMaskIntoConstraints = false
-        labelNameHabit.text = "Название"
+        labelNameHabit.text = "Напишите название привычки"
         return labelNameHabit
     }()
 
     private lazy var textFieldNameNewHabit: UITextField = {
+
         var textFieldNameNewHabit = UITextField()
         textFieldNameNewHabit.translatesAutoresizingMaskIntoConstraints = false
         textFieldNameNewHabit.delegate = self
-        textFieldNameNewHabit.text = "Напишите новою привычку"
-        textFieldNameNewHabit.textColor = .systemGray2
-    //  textFieldNameNewHabit.backgroundColor = .systemGray6
+     //   textFieldNameNewHabit.text = "Напишите новою привычку"
+        textFieldNameNewHabit.textColor = .black
+        textFieldNameNewHabit.backgroundColor = .systemGray6
+        textFieldNameNewHabit.layer.cornerRadius = 10
         textFieldNameNewHabit.addTarget(self, action: #selector(actionTextFieldNameNewHabit), for: .editingChanged)
         return textFieldNameNewHabit
     }()
@@ -52,6 +60,27 @@ class HabitViewController: UIViewController {
         return colorView
     }()
 
+    private lazy var labelDate: UILabel = {
+        var labelDate = UILabel()
+        labelDate.translatesAutoresizingMaskIntoConstraints = false
+        labelDate.text = "Задайте время"
+        return labelDate
+    }()
+
+    private lazy var labelEveryday: UILabel = {
+        var labelEveryday = UILabel()
+        labelEveryday.translatesAutoresizingMaskIntoConstraints = false
+        labelEveryday.text = "Каждый день в"
+        return labelEveryday
+    }()
+
+    private lazy var datePicker: UIDatePicker = {
+        var datePicker = UIDatePicker()
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.datePickerMode = .time
+        datePicker.addTarget(self, action: #selector(actionDatePicker), for: .valueChanged)
+        return datePicker
+    }()
 
 
     override func viewDidLoad() {
@@ -59,7 +88,7 @@ class HabitViewController: UIViewController {
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.backgroundColor = .systemGray6
         self.navigationItem.title = "Создать"
-        [labelNameHabit, textFieldNameNewHabit, labelColor, colorView].forEach({ self.view.addSubview($0) })
+        [labelNameHabit, textFieldNameNewHabit, labelColor, colorView, labelDate, labelEveryday, datePicker].forEach({ self.view.addSubview($0) })
         self.navigationItem.rightBarButtonItem = buttonNavRight
 
         setupGesture()
@@ -75,6 +104,7 @@ class HabitViewController: UIViewController {
 
             self.textFieldNameNewHabit.topAnchor.constraint(equalTo: self.labelNameHabit.bottomAnchor, constant: 14),
             self.textFieldNameNewHabit.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 14),
+            self.textFieldNameNewHabit.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),
 
             self.labelColor.topAnchor.constraint(equalTo: self.textFieldNameNewHabit.bottomAnchor, constant: 14),
             self.labelColor.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 14),
@@ -82,9 +112,17 @@ class HabitViewController: UIViewController {
             self.colorView.topAnchor.constraint(equalTo: self.labelColor.bottomAnchor, constant: 14),
             self.colorView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 14),
             self.colorView.widthAnchor.constraint(equalToConstant: 40),
-            self.colorView.heightAnchor.constraint(equalToConstant: 40)
+            self.colorView.heightAnchor.constraint(equalToConstant: 40),
+
+            self.labelDate.topAnchor.constraint(equalTo: self.colorView.bottomAnchor, constant: 14),
+            self.labelDate.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 14),
+
+            self.labelEveryday.topAnchor.constraint(equalTo: self.labelDate.bottomAnchor, constant: 14),
+            self.labelEveryday.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 14),
 
 
+            self.datePicker.leadingAnchor.constraint(equalTo: self.labelEveryday.trailingAnchor, constant: 7),
+            self.datePicker.centerYAnchor.constraint(equalTo: self.labelEveryday.centerYAnchor)
         ])
     }
 
@@ -98,21 +136,32 @@ class HabitViewController: UIViewController {
 
         if textField.text != nil {
         self.nameNewHabit = textField.text!
+        print(nameNewHabit!)
         }
-        print(nameNewHabit)
+    }
+
+    @objc private func actionDatePicker() {
+        self.dateNewHabit = datePicker.date
+        print(dateNewHabit!)
     }
 
     @objc private func actionButtonNavRight() {
         print("safe")
 
-//        if nameNewHabit != "" && colorView.backgroundColor != nil {
-//        let newHabit = Habit(name: self.nameNewHabit,
-//                             date: <#T##Date#>,
-//                             color: colorView.backgroundColor!)
-//
-//        let store = HabitsStore.shared
-//        store.habits.append(newHabit)
-//    }
+        if nameNewHabit != nil && colorView.backgroundColor != nil && dateNewHabit != nil  {
+        let newHabit = Habit(name: self.nameNewHabit!,
+                             date: self.dateNewHabit!,
+                             color: self.colorView.backgroundColor!)
+
+        let store = HabitsStore.shared
+        store.habits.append(newHabit)
+        print(newHabit)
+            self.dismiss(animated: true)
+        }
+
+        else if nameNewHabit == nil || dateNewHabit == nil {
+            print("Заполните все обязательные поля")
+    }
     }
 
     @objc private func actionGestureColorView() {
@@ -123,7 +172,6 @@ class HabitViewController: UIViewController {
         colorPicker.selectedColor = .black
         present(colorPicker, animated: true)
     }
-
 }
 
 extension HabitViewController: UITextFieldDelegate, UIColorPickerViewControllerDelegate {
@@ -132,6 +180,5 @@ extension HabitViewController: UITextFieldDelegate, UIColorPickerViewControllerD
         print(viewController.selectedColor)
         self.colorView.backgroundColor = viewController.selectedColor
     }
-
 }
 
