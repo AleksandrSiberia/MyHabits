@@ -28,6 +28,7 @@ class InfoViewController: UIViewController {
         var labelInfo = UILabel()
         labelInfo.text = "Привычка за 21 день"
         labelInfo.translatesAutoresizingMaskIntoConstraints = false
+        labelInfo.numberOfLines = 0
         return labelInfo
     }()
 
@@ -66,7 +67,8 @@ class InfoViewController: UIViewController {
             self.labelInfo.topAnchor.constraint(equalTo: self.stackViewInfo.topAnchor),
 
             self.labelTextInfo.topAnchor.constraint(equalTo: self.labelInfo.bottomAnchor, constant: 14),
-            self.labelTextInfo.widthAnchor.constraint(equalTo: self.stackViewInfo.widthAnchor),
+            self.labelTextInfo.leadingAnchor.constraint(equalTo: self.stackViewInfo.leadingAnchor, constant: 14),
+            self.labelTextInfo.trailingAnchor.constraint(equalTo: self.stackViewInfo.trailingAnchor, constant: -14),
             self.labelTextInfo.bottomAnchor.constraint(equalTo: self.stackViewInfo.bottomAnchor)
         ])
     }

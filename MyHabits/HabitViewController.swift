@@ -37,7 +37,7 @@ class HabitViewController: UIViewController {
         var textFieldNameNewHabit = UITextField()
         textFieldNameNewHabit.translatesAutoresizingMaskIntoConstraints = false
         textFieldNameNewHabit.delegate = self
-     //   textFieldNameNewHabit.text = "Напишите новою привычку"
+   //   textFieldNameNewHabit.text = "Напишите новою привычку"
         textFieldNameNewHabit.textColor = .black
         textFieldNameNewHabit.backgroundColor = .systemGray6
         textFieldNameNewHabit.layer.cornerRadius = 10
