@@ -45,8 +45,11 @@ class HabitsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(HabitsStore.shared.todayProgress)
-        print(HabitsStore.shared.habits)
+     
+    }
+
+    func reloadCollectionViewHabits() {
+        collectionViewHabits.reloadData()
     }
 
     
@@ -86,7 +89,7 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
         let cell = collectionViewHabits.dequeueReusableCell(withReuseIdentifier: HabitCollectionViewCell.nameCollectionCell, for: indexPath) as! HabitCollectionViewCell
         cell.layer.cornerRadius = 10
 
-        cell.setupContent(HabitsStore.shared.habits[indexPath.row - 1])
+        cell.setupContent(HabitsStore.shared.habits[indexPath.item - 1], indexPath: indexPath)
         return cell
 
     }

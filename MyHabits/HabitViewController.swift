@@ -37,7 +37,6 @@ class HabitViewController: UIViewController {
         var textFieldNameNewHabit = UITextField()
         textFieldNameNewHabit.translatesAutoresizingMaskIntoConstraints = false
         textFieldNameNewHabit.delegate = self
-   //   textFieldNameNewHabit.text = "Напишите новою привычку"
         textFieldNameNewHabit.textColor = .black
         textFieldNameNewHabit.backgroundColor = .systemGray6
         textFieldNameNewHabit.layer.cornerRadius = 10
@@ -119,7 +118,6 @@ class HabitViewController: UIViewController {
 
             self.labelEveryday.topAnchor.constraint(equalTo: self.labelDate.bottomAnchor, constant: 14),
             self.labelEveryday.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 14),
-
 
             self.datePicker.leadingAnchor.constraint(equalTo: self.labelEveryday.trailingAnchor, constant: 7),
             self.datePicker.centerYAnchor.constraint(equalTo: self.labelEveryday.centerYAnchor)

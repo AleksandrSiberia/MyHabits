@@ -25,7 +25,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     private lazy var labelPrecent: UILabel = {
         var precent = UILabel()
         precent.translatesAutoresizingMaskIntoConstraints = false
-        precent.text = "%"
+        precent.text = "\(HabitsStore.shared.todayProgress * 100) %"
         precent.numberOfLines = 0
         return precent
     }()
@@ -61,7 +61,8 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     private func setupConstraints() {
 
         let widthViewProgress = UIScreen.main.bounds.width - 14 - 14 - 14 - 14
-        let widthViewColorProgress = widthViewProgress * 0.5
+        let widthViewColorProgress = widthViewProgress * CGFloat(HabitsStore.shared.todayProgress)
+
 
         NSLayoutConstraint.activate([
             self.labelMotivation.topAnchor.constraint(equalTo: self.topAnchor, constant: 14),
