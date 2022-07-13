@@ -45,12 +45,13 @@ class HabitsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-     
+
     }
 
     func reloadCollectionViewHabits() {
-        collectionViewHabits.reloadData()
+        self.collectionViewHabits.reloadData()
     }
+
 
     
     func setupConstraints() {
@@ -67,11 +68,12 @@ class HabitsViewController: UIViewController {
         ])
     }
 
+ 
+
 
     @objc private func actionButtonAddHabit() {
 
         let navHabitViewController = UINavigationController(rootViewController: HabitViewController())
-
         self.navigationController?.present(navHabitViewController, animated: true)
     }
 }
@@ -87,8 +89,8 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
         }
 
         let cell = collectionViewHabits.dequeueReusableCell(withReuseIdentifier: HabitCollectionViewCell.nameCollectionCell, for: indexPath) as! HabitCollectionViewCell
-        cell.layer.cornerRadius = 10
 
+        cell.layer.cornerRadius = 10
         cell.setupContent(HabitsStore.shared.habits[indexPath.item - 1], indexPath: indexPath)
         return cell
 
@@ -100,9 +102,7 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenWidth = UIScreen.main.bounds.width
-
         let widthItem = screenWidth - flowLayoutCollectionViewHabits.sectionInset.left - flowLayoutCollectionViewHabits.sectionInset.right
-
         guard indexPath.row != 0 else {
             return CGSize(width: widthItem, height: 77)
         }
@@ -110,7 +110,20 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
 
 
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(HabitDetailsViewController(), animated: true)
+
+        let habitDetailsViewController = HabitDetailsViewController()
+        habitDetailsViewController.setupHabitDetailsViewController(indexPith: indexPath)
+        
+
+
+    }
+
+
 }
+
 
 
 

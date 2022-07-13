@@ -9,8 +9,9 @@ import UIKit
 
 class HabitCollectionViewCell: UICollectionViewCell {
 
+    var parent: UIViewController?
 
-    private lazy var indexHabitInArray: Int = {
+    lazy var indexHabitInArray: Int = {
         var numberHabitInArray = Int()
         return numberHabitInArray
     }()
@@ -87,21 +88,20 @@ class HabitCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        
-
-
         print(indexHabitInArray)
         print(HabitsStore.shared.todayProgress)
- //       HabitsStore.shared.habits.forEach({print($0.isAlreadyTakenToday)})
         print(HabitsStore.shared.habits[indexHabitInArray].isAlreadyTakenToday)
     }
-
 
 
     private func setupGestureRecogniser() {
         let gestureRecognizer = UITapGestureRecognizer()
         gestureRecognizer.addTarget(self, action: #selector(actionGestureRecognizer))
         self.viewTrack.addGestureRecognizer(gestureRecognizer)
+
+
+    
+        
     }
 
     private func setupConstrains() {
@@ -163,11 +163,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
         self.viewTrack.backgroundColor = colorBackgroundViewTrack
         self.imageCheckMark.isHidden = false
 
-
-//        let habitsViewController = HabitsViewController()
-//        habitsViewController.reloadCollectionViewHabits()
-        
-
+        let habitsViewController = HabitsViewController()
+        habitsViewController.reloadCollectionViewHabits()
 
     }
 }

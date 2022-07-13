@@ -58,6 +58,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+
     private func setupConstraints() {
 
         let widthViewProgress = UIScreen.main.bounds.width - 14 - 14 - 14 - 14
@@ -80,7 +81,6 @@ class ProgressCollectionViewCell: UICollectionViewCell {
             self.viewColorProgress.leadingAnchor.constraint(equalTo: self.viewProgress.leadingAnchor),
             self.viewColorProgress.bottomAnchor.constraint(equalTo: self.viewProgress.bottomAnchor),
             self.viewColorProgress.widthAnchor.constraint(equalToConstant: widthViewColorProgress)
-
         ])
     }
 }

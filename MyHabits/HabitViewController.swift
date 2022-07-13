@@ -152,9 +152,13 @@ class HabitViewController: UIViewController {
                              color: self.colorView.backgroundColor!)
 
         let store = HabitsStore.shared
-        store.habits.append(newHabit)
+            store.habits.insert(newHabit, at: 0)
         print(newHabit)
-            self.dismiss(animated: true)
+        let habitsViewController = HabitsViewController()
+        habitsViewController.reloadCollectionViewHabits()
+
+        self.dismiss(animated: true)
+
         }
 
         else if nameNewHabit == nil || dateNewHabit == nil {

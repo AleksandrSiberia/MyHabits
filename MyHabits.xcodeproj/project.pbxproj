@@ -20,6 +20,9 @@
 		8B49D634286D85E300990470 /* HabitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49D633286D85E300990470 /* HabitsViewController.swift */; };
 		8B49D636286D867B00990470 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49D635286D867B00990470 /* InfoViewController.swift */; };
 		8B49D638286EC84500990470 /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49D637286EC84500990470 /* HabitViewController.swift */; };
+		8BE4221E287D4D0800132F6D /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4221D287D4D0800132F6D /* HabitDetailsViewController.swift */; };
+		8BE42220287D722400132F6D /* DatesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4221F287D722300132F6D /* DatesTableViewCell.swift */; };
+		8BE42222287DA9DE00132F6D /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE42221287DA9DE00132F6D /* Struct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		8B49D633286D85E300990470 /* HabitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewController.swift; sourceTree = "<group>"; };
 		8B49D635286D867B00990470 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		8B49D637286EC84500990470 /* HabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
+		8BE4221D287D4D0800132F6D /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
+		8BE4221F287D722300132F6D /* DatesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesTableViewCell.swift; sourceTree = "<group>"; };
+		8BE42221287DA9DE00132F6D /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,9 @@
 				8B49D637286EC84500990470 /* HabitViewController.swift */,
 				8B0E16E32872E22E00B7168C /* ProgressCollectionViewCell.swift */,
 				8B0E16E52872E34700B7168C /* HabitCollectionViewCell.swift */,
+				8BE4221D287D4D0800132F6D /* HabitDetailsViewController.swift */,
+				8BE42221287DA9DE00132F6D /* Struct.swift */,
+				8BE4221F287D722300132F6D /* DatesTableViewCell.swift */,
 				8B0E16DF286F07C600B7168C /* ColorView.swift */,
 				8B49D635286D867B00990470 /* InfoViewController.swift */,
 				8B49D624286D771800990470 /* Assets.xcassets */,
@@ -163,8 +172,11 @@
 				8B49D620286D771700990470 /* ViewController.swift in Sources */,
 				8B49D638286EC84500990470 /* HabitViewController.swift in Sources */,
 				8B49D61C286D771700990470 /* AppDelegate.swift in Sources */,
+				8BE42222287DA9DE00132F6D /* Struct.swift in Sources */,
+				8BE4221E287D4D0800132F6D /* HabitDetailsViewController.swift in Sources */,
 				8B0E16E0286F07C600B7168C /* ColorView.swift in Sources */,
 				8B0E16E42872E22E00B7168C /* ProgressCollectionViewCell.swift in Sources */,
+				8BE42220287D722400132F6D /* DatesTableViewCell.swift in Sources */,
 				8B49D634286D85E300990470 /* HabitsViewController.swift in Sources */,
 				8B49D636286D867B00990470 /* InfoViewController.swift in Sources */,
 				8B49D61E286D771700990470 /* SceneDelegate.swift in Sources */,
