@@ -163,6 +163,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         self.viewTrack.backgroundColor = colorBackgroundViewTrack
         self.imageCheckMark.isHidden = false
 
+
         let habitsViewController = HabitsViewController()
         habitsViewController.reloadCollectionViewHabits()
 

@@ -92,6 +92,7 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
         cell.layer.cornerRadius = 10
         cell.setupContent(HabitsStore.shared.habits[indexPath.item - 1], indexPath: indexPath)
+
         return cell
 
     }
@@ -112,10 +113,15 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(HabitDetailsViewController(), animated: true)
 
         let habitDetailsViewController = HabitDetailsViewController()
-        habitDetailsViewController.setupHabitDetailsViewController(indexPith: indexPath)
+                habitDetailsViewController.setupHabitDetailsViewController(indexPith: indexPath)
+
+        self.navigationController?.pushViewController(habitDetailsViewController, animated: true)
+
+
+
+
         
 
 

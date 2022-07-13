@@ -144,7 +144,6 @@ class HabitViewController: UIViewController {
     }
 
     @objc private func actionButtonNavRight() {
-        print("safe")
 
         if nameNewHabit != nil && colorView.backgroundColor != nil && dateNewHabit != nil  {
         let newHabit = Habit(name: self.nameNewHabit!,
@@ -154,6 +153,7 @@ class HabitViewController: UIViewController {
         let store = HabitsStore.shared
             store.habits.insert(newHabit, at: 0)
         print(newHabit)
+
         let habitsViewController = HabitsViewController()
         habitsViewController.reloadCollectionViewHabits()
 

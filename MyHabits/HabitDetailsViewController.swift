@@ -9,7 +9,7 @@ import UIKit
 
 class HabitDetailsViewController: UIViewController {
 
-    lazy var indexHabitInArray: Int = {
+    private lazy var indexHabitInArray: Int = {
         var indexHabitInArray = Int()
         return indexHabitInArray
     }()
@@ -39,30 +39,24 @@ class HabitDetailsViewController: UIViewController {
         self.view.backgroundColor = UIColor(named: "customGrey" )
         [labelActivity, tableViewDate].forEach({ self.view.addSubview($0) })
         setupConstraints()
+
+        print("IndexHabit:", indexHabitInArray)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-
-//        if let name: String = self.nameHabit?.name {
-//            self.navigationItem.title = name
-//        }
-    }
-
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-
-    }
 
     func setupHabitDetailsViewController(indexPith: IndexPath) {
-        let habit: Habit = HabitsStore.shared.habits[indexPith.row - 1]
 
+        let habit: Habit = HabitsStore.shared.habits[indexPith.row - 1]
         nameHabit = habit.name
-        print("Имя привычки:", nameHabit!)
+
+        if let name: String = self.nameHabit {
+                  self.navigationItem.title = name
+              }
+
+        self.indexHabitInArray = indexPith.item - 1
     }
+
+
 
     func setupConstraints() {
         NSLayoutConstraint.activate ([
@@ -87,7 +81,7 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DatesTableViewCell.nameTableViewCell, for: indexPath) as! DatesTableViewCell
 
-        cell.setupDatesTableViewCell(date: HabitsStore.shared.dates[indexPath.row], number: 7)
+        cell.setupDatesTableViewCell(date: HabitsStore.shared.dates[indexPath.row], number: indexHabitInArray)
 
         return cell
     }

@@ -68,6 +68,7 @@ class DatesTableViewCell: UITableViewCell {
         if dateTrackedTrueFalse == true {
             imageViewTracked.isHidden = false
         }
+
     }
 
 }
