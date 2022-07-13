@@ -10,6 +10,11 @@ import UIKit
 
 class HabitViewController: UIViewController {
 
+    private lazy var indexHabitInArray: Int = {
+        var numberHabitInArray = Int()
+        return numberHabitInArray
+    }()
+
     private lazy var nameNewHabit: String? = {
         var nameNewHabit: String?
         return nameNewHabit
@@ -124,6 +129,16 @@ class HabitViewController: UIViewController {
         ])
     }
 
+    func setupHabitViewController(habit: Habit, indexHabit: Int) {
+        self.textFieldNameNewHabit.text = habit.name
+        self.colorView.backgroundColor = habit.color
+        self.datePicker.date = habit.date
+        self.indexHabitInArray = indexHabit
+
+        self.buttonNavRight = UIBarButtonItem(title: "Сохранить2", style: .plain, target: self, action: #selector(actionResaveButtonNavRight))
+    }
+
+    
     private func setupGesture() {
         let gesture = UITapGestureRecognizer()
         gesture.addTarget(self, action: #selector(actionGestureColorView))
@@ -149,22 +164,35 @@ class HabitViewController: UIViewController {
         let newHabit = Habit(name: self.nameNewHabit!,
                              date: self.dateNewHabit!,
                              color: self.colorView.backgroundColor!)
-
         let store = HabitsStore.shared
             store.habits.insert(newHabit, at: 0)
         print(newHabit)
-
         let habitsViewController = HabitsViewController()
         habitsViewController.reloadCollectionViewHabits()
-
         self.dismiss(animated: true)
-
         }
-
         else if nameNewHabit == nil || dateNewHabit == nil {
             print("Заполните все обязательные поля")
     }
     }
+
+
+    @objc private func actionResaveButtonNavRight() {
+        let editedHabit = HabitsStore.shared.habits.remove(at: indexHabitInArray)
+
+        if self.colorView.backgroundColor != nil && self.textFieldNameNewHabit.text != nil {
+        editedHabit.color = self.colorView.backgroundColor!
+        editedHabit.date = self.datePicker.date
+        editedHabit.name = self.textFieldNameNewHabit.text!
+        }
+        print(editedHabit.name)
+        HabitsStore.shared.habits.insert(editedHabit, at: indexHabitInArray)
+
+        let habitsViewController = HabitsViewController()
+        habitsViewController.reloadCollectionViewHabits()
+        self.dismiss(animated: true)
+    }
+
 
     @objc private func actionGestureColorView() {
         print("gesture")

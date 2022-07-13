@@ -9,9 +9,8 @@ import UIKit
 
 class HabitCollectionViewCell: UICollectionViewCell {
 
-    var parent: UIViewController?
 
-    lazy var indexHabitInArray: Int = {
+    private lazy var indexHabitInArray: Int = {
         var numberHabitInArray = Int()
         return numberHabitInArray
     }()

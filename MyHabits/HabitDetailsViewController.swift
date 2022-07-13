@@ -14,8 +14,12 @@ class HabitDetailsViewController: UIViewController {
         return indexHabitInArray
     }()
 
+    private var nameHabit: String?
 
-    var nameHabit: String?
+    private lazy var barButtonRight: UIBarButtonItem = {
+        var barButtonRight = UIBarButtonItem(title: "Править", style: .plain, target: self, action: #selector(actionBarButtonRight))
+        return barButtonRight
+    }()
 
     private lazy var labelActivity: UILabel = {
         var labelActivity = UILabel()
@@ -23,6 +27,7 @@ class HabitDetailsViewController: UIViewController {
         labelActivity.text = "АКТИВНОСТЬ"
         return labelActivity
     }()
+
 
     private lazy var tableViewDate: UITableView = {
         var tableViewDate = UITableView()
@@ -39,8 +44,8 @@ class HabitDetailsViewController: UIViewController {
         self.view.backgroundColor = UIColor(named: "customGrey" )
         [labelActivity, tableViewDate].forEach({ self.view.addSubview($0) })
         setupConstraints()
+        self.navigationItem.rightBarButtonItem = barButtonRight
 
-        print("IndexHabit:", indexHabitInArray)
     }
 
 
@@ -56,8 +61,6 @@ class HabitDetailsViewController: UIViewController {
         self.indexHabitInArray = indexPith.item - 1
     }
 
-
-
     func setupConstraints() {
         NSLayoutConstraint.activate ([
             self.labelActivity.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 14),
@@ -68,6 +71,14 @@ class HabitDetailsViewController: UIViewController {
             self.tableViewDate.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),
             self.tableViewDate.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -14),
         ])
+    }
+
+    @objc func actionBarButtonRight() {
+        let habitViewController = HabitViewController()
+        let navHabitViewController = UINavigationController(rootViewController: habitViewController)
+        self.navigationController?.present(navHabitViewController, animated: true)
+
+        habitViewController.setupHabitViewController(habit: HabitsStore.shared.habits[indexHabitInArray], indexHabit: indexHabitInArray)
     }
 
 }
