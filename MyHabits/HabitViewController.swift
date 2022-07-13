@@ -86,13 +86,22 @@ class HabitViewController: UIViewController {
         return datePicker
     }()
 
+    private lazy var buttonDelateHabit: UIButton = {
+        var buttonDelateHabit = UIButton()
+        buttonDelateHabit.translatesAutoresizingMaskIntoConstraints = false
+        buttonDelateHabit.setTitle("Удалить привычку", for: .normal)
+        buttonDelateHabit.setTitleColor(UIColor.red, for: .normal)
+        buttonDelateHabit.isHidden = true
+        return buttonDelateHabit
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.backgroundColor = .systemGray6
         self.navigationItem.title = "Создать"
-        [labelNameHabit, textFieldNameNewHabit, labelColor, colorView, labelDate, labelEveryday, datePicker].forEach({ self.view.addSubview($0) })
+        [labelNameHabit, textFieldNameNewHabit, labelColor, colorView, labelDate, labelEveryday, datePicker, buttonDelateHabit].forEach({ self.view.addSubview($0) })
         self.navigationItem.rightBarButtonItem = buttonNavRight
 
         setupGesture()
@@ -125,7 +134,10 @@ class HabitViewController: UIViewController {
             self.labelEveryday.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 14),
 
             self.datePicker.leadingAnchor.constraint(equalTo: self.labelEveryday.trailingAnchor, constant: 7),
-            self.datePicker.centerYAnchor.constraint(equalTo: self.labelEveryday.centerYAnchor)
+            self.datePicker.centerYAnchor.constraint(equalTo: self.labelEveryday.centerYAnchor),
+
+            self.buttonDelateHabit.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,constant: -14),
+            self.buttonDelateHabit.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
         ])
     }
 
@@ -134,6 +146,7 @@ class HabitViewController: UIViewController {
         self.colorView.backgroundColor = habit.color
         self.datePicker.date = habit.date
         self.indexHabitInArray = indexHabit
+        self.buttonDelateHabit.isHidden = false
 
         self.buttonNavRight = UIBarButtonItem(title: "Сохранить2", style: .plain, target: self, action: #selector(actionResaveButtonNavRight))
     }
@@ -185,7 +198,6 @@ class HabitViewController: UIViewController {
         editedHabit.date = self.datePicker.date
         editedHabit.name = self.textFieldNameNewHabit.text!
         }
-        print(editedHabit.name)
         HabitsStore.shared.habits.insert(editedHabit, at: indexHabitInArray)
 
         let habitsViewController = HabitsViewController()
