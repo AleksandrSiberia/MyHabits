@@ -91,6 +91,7 @@ class HabitViewController: UIViewController {
         buttonDelateHabit.translatesAutoresizingMaskIntoConstraints = false
         buttonDelateHabit.setTitle("Удалить привычку", for: .normal)
         buttonDelateHabit.setTitleColor(UIColor.red, for: .normal)
+        buttonDelateHabit.addTarget(self, action: #selector(actionButtonDelateHabit), for: .touchUpInside)
         buttonDelateHabit.isHidden = true
         return buttonDelateHabit
     }()
@@ -213,6 +214,32 @@ class HabitViewController: UIViewController {
         colorPicker.title = "Выбери цвет привычки"
         colorPicker.selectedColor = .black
         present(colorPicker, animated: true)
+    }
+
+    @objc private func actionButtonDelateHabit() {
+
+        let alert = UIAlertController(title: "Удалить привычку", message: "Вы хотите удалить привычку - \(HabitsStore.shared.habits[indexHabitInArray].name) ", preferredStyle: .alert)
+
+        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel) { _ in
+            print("cancel")
+        }
+        alert.addAction(actionCancel)
+
+
+        let actionDelete = UIAlertAction(title: "Удалить", style: .destructive) { _ in
+            HabitsStore.shared.habits.remove(at: self.indexHabitInArray)
+
+            let habitDetailsViewController = HabitDetailsViewController()
+            habitDetailsViewController.dismiss(animated: true)
+            
+            self.dismiss(animated: true)
+
+        }
+        alert.addAction(actionDelete)
+
+        present(alert, animated: true)
+
+
     }
 }
 

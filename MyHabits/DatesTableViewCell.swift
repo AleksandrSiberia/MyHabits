@@ -42,7 +42,6 @@ class DatesTableViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
- //       print(indexHabitInArray)
     }
 
 

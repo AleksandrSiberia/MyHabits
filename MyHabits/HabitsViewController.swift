@@ -45,6 +45,7 @@ class HabitsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.collectionViewHabits.reloadData()
 
     }
 

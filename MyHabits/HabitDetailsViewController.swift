@@ -61,6 +61,7 @@ class HabitDetailsViewController: UIViewController {
         self.indexHabitInArray = indexPith.item - 1
     }
 
+  
     func setupConstraints() {
         NSLayoutConstraint.activate ([
             self.labelActivity.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 14),
