@@ -21,8 +21,13 @@ class HabitViewController: UIViewController {
     }()
 
     private lazy var dateNewHabit: Date? = {
-        var dateNewHabit: Date?
+        var dateNewHabit: Date = Date()
         return dateNewHabit
+    }()
+
+    private lazy var buttonNavLeft: UIBarButtonItem = {
+        var buttonNavLeft = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(actionButtonNavLeft))
+        return buttonNavLeft
     }()
 
     private lazy var buttonNavRight: UIBarButtonItem = {
@@ -103,7 +108,9 @@ class HabitViewController: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = .systemGray6
         self.navigationItem.title = "Создать"
         [labelNameHabit, textFieldNameNewHabit, labelColor, colorView, labelDate, labelEveryday, datePicker, buttonDelateHabit].forEach({ self.view.addSubview($0) })
-        self.navigationItem.rightBarButtonItem = buttonNavRight
+        self.navigationItem.rightBarButtonItem = self.buttonNavRight
+        self.navigationItem.leftBarButtonItem = self.buttonNavLeft
+
 
         setupGesture()
         setupConstrains()
@@ -148,8 +155,7 @@ class HabitViewController: UIViewController {
         self.datePicker.date = habit.date
         self.indexHabitInArray = indexHabit
         self.buttonDelateHabit.isHidden = false
-
-        self.buttonNavRight = UIBarButtonItem(title: "Сохранить2", style: .plain, target: self, action: #selector(actionResaveButtonNavRight))
+        self.buttonNavRight = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(actionResaveButtonNavRight))
     }
 
     
@@ -172,6 +178,10 @@ class HabitViewController: UIViewController {
         print(dateNewHabit!)
     }
 
+    @objc private func actionButtonNavLeft() {
+        self.dismiss(animated: true)
+    }
+
     @objc private func actionButtonNavRight() {
 
         if nameNewHabit != nil && colorView.backgroundColor != nil && dateNewHabit != nil  {
@@ -180,13 +190,13 @@ class HabitViewController: UIViewController {
                              color: self.colorView.backgroundColor!)
         let store = HabitsStore.shared
             store.habits.insert(newHabit, at: 0)
-        print(newHabit)
+
         let habitsViewController = HabitsViewController()
         habitsViewController.reloadCollectionViewHabits()
         self.dismiss(animated: true)
         }
         else if nameNewHabit == nil || dateNewHabit == nil {
-            print("Заполните все обязательные поля")
+            print("Напишите название привычки")
     }
     }
 
@@ -208,7 +218,6 @@ class HabitViewController: UIViewController {
 
 
     @objc private func actionGestureColorView() {
-        print("gesture")
         let colorPicker = UIColorPickerViewController()
         colorPicker.delegate = self
         colorPicker.title = "Выбери цвет привычки"
@@ -236,7 +245,6 @@ class HabitViewController: UIViewController {
 
         }
         alert.addAction(actionDelete)
-
         present(alert, animated: true)
 
 

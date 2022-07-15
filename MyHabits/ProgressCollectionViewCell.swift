@@ -18,6 +18,8 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         var labelMotivation = UILabel()
         labelMotivation.translatesAutoresizingMaskIntoConstraints = false
         labelMotivation.text = "Все получится!"
+        labelMotivation.font = UIFont(name: "SFProText-Semibold", size: 13)
+        labelMotivation.textColor = .systemGray
         labelMotivation.numberOfLines = 0
         return labelMotivation
     }()
@@ -25,8 +27,10 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     private lazy var labelPrecent: UILabel = {
         var precent = UILabel()
         precent.translatesAutoresizingMaskIntoConstraints = false
-        precent.text = "\(HabitsStore.shared.todayProgress * 100) %"
+        precent.text = "\(round(HabitsStore.shared.todayProgress * 100)) %"
         precent.numberOfLines = 0
+        precent.font = UIFont(name: "SFProText-Semibold", size: 13)
+        precent.textColor = .systemGray
         return precent
     }()
 
@@ -60,10 +64,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
 
     func setNewProgress() {
         self.labelPrecent.text = "\(HabitsStore.shared.todayProgress * 100) %"
-        
-        
     }
-
 
     private func setupConstraints() {
 

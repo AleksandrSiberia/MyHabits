@@ -28,7 +28,6 @@ class HabitDetailsViewController: UIViewController {
         return labelActivity
     }()
 
-
     private lazy var tableViewDate: UITableView = {
         var tableViewDate = UITableView()
         tableViewDate.translatesAutoresizingMaskIntoConstraints = false
@@ -45,6 +44,10 @@ class HabitDetailsViewController: UIViewController {
         [labelActivity, tableViewDate].forEach({ self.view.addSubview($0) })
         setupConstraints()
         self.navigationItem.rightBarButtonItem = barButtonRight
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
     }
 
@@ -93,8 +96,8 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DatesTableViewCell.nameTableViewCell, for: indexPath) as! DatesTableViewCell
 
-        cell.setupDatesTableViewCell(date: HabitsStore.shared.dates[indexPath.row], number: indexHabitInArray)
 
+        cell.setupDatesTableViewCell(date: HabitsStore.shared.dates[indexPath.row], number: indexHabitInArray, indexPath: indexPath )
         return cell
     }
 }

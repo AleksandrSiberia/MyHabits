@@ -24,13 +24,16 @@ class HabitCollectionViewCell: UICollectionViewCell {
         var labelHabitName = UILabel()
         labelHabitName.translatesAutoresizingMaskIntoConstraints = false
         labelHabitName.numberOfLines = 0
-        return labelHabitName
+        labelHabitName.font = UIFont(name: "SFProText-Semibold", size: 17)
+                        return labelHabitName
     }()
 
     private lazy var labelTimeHabit: UILabel = {
         var labelTimeHabit = UILabel()
         labelTimeHabit.translatesAutoresizingMaskIntoConstraints = false
         labelTimeHabit.text = "Каждый день в "
+        labelTimeHabit.font = UIFont(name: "SFProText-Regular", size: 12)
+        labelTimeHabit.textColor = .systemGray2
         labelTimeHabit.numberOfLines = 0
         return labelTimeHabit
     }()
@@ -39,6 +42,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
         var labelDateTimeHabit = UILabel()
         labelDateTimeHabit.translatesAutoresizingMaskIntoConstraints = false
         labelDateTimeHabit.numberOfLines = 0
+        labelDateTimeHabit.font = UIFont(name: "SFProText-Regular", size: 12)
+        labelDateTimeHabit.textColor = .systemGray2
         return labelDateTimeHabit
     }()
 
@@ -47,6 +52,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
         labelCounter.translatesAutoresizingMaskIntoConstraints = false
         labelCounter.text = "Счетчик: 0"
         labelCounter.numberOfLines = 0
+        labelCounter.font = UIFont(name: "SFProText-Regular", size: 14)
+        labelCounter.textColor = .systemGray
         return labelCounter
     }()
 
@@ -86,10 +93,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        labelHabitName.textColor = self.colorBackgroundViewTrack
 
-        print(indexHabitInArray)
-        print(HabitsStore.shared.todayProgress)
-        print(HabitsStore.shared.habits[indexHabitInArray].isAlreadyTakenToday)
     }
 
 
@@ -97,12 +102,9 @@ class HabitCollectionViewCell: UICollectionViewCell {
         let gestureRecognizer = UITapGestureRecognizer()
         gestureRecognizer.addTarget(self, action: #selector(actionGestureRecognizer))
         self.viewTrack.addGestureRecognizer(gestureRecognizer)
-
-
-    
-        
     }
 
+    
     private func setupConstrains() {
         NSLayoutConstraint.activate([
             self.labelHabitName.topAnchor.constraint(equalTo: self.topAnchor, constant: 14),
@@ -159,7 +161,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         HabitsStore.shared.track(HabitsStore.shared.habits[indexHabitInArray])
         }
 
-        self.viewTrack.backgroundColor = colorBackgroundViewTrack
+        self.viewTrack.backgroundColor = self.colorBackgroundViewTrack
         self.imageCheckMark.isHidden = false
 
 

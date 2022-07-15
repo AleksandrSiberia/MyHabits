@@ -1,0 +1,11 @@
+/*
+ 
+ SF Pro Display ["SFProDisplay-Semibold"]
+ SF Pro Text ["SFProText-Regular", "SFProText-Semibold"]
+
+ UIFont.familyNames.forEach({ familyName in
+     let fontNames = UIFont.fontNames(forFamilyName: familyName)
+     print(familyName, fontNames)
+ })
+  
+*/

@@ -57,12 +57,14 @@ class DatesTableViewCell: UITableViewCell {
     }
 
     
-    func setupDatesTableViewCell(date: Date, number: Int) {
-        self.labelDate.text = "\(date)"
+    func setupDatesTableViewCell(date: Date, number: Int, indexPath: IndexPath) {
+
+        let stringDate = HabitsStore.shared.trackDateString(forIndex: indexPath.item)
+
+        self.labelDate.text = stringDate
 
         let dateTrackedTrueFalse = HabitsStore.shared.habit(HabitsStore.shared.habits[number], isTrackedIn: date)
 
-        print(number, date, dateTrackedTrueFalse)
 
         if dateTrackedTrueFalse == true {
             imageViewTracked.isHidden = false
