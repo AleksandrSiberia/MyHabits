@@ -44,12 +44,11 @@ class HabitDetailsViewController: UIViewController {
         [labelActivity, tableViewDate].forEach({ self.view.addSubview($0) })
         setupConstraints()
         self.navigationItem.rightBarButtonItem = barButtonRight
-        
     }
 
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
     }
 
 
@@ -104,8 +103,18 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DatesTableViewCell.nameTableViewCell, for: indexPath) as! DatesTableViewCell
 
+    //    let sortedArrayDate = HabitsStore.shared.dates.sorted(by: >)
 
-        cell.setupDatesTableViewCell(date: HabitsStore.shared.dates[indexPath.row], number: indexHabitInArray, indexPath: indexPath )
+        var arrayIndex:[Int] = []
+        var dateIndex = HabitsStore.shared.dates.count - 1
+        while dateIndex >= 0 {
+            arrayIndex.append(dateIndex)
+            dateIndex -= 1
+        }
+        print(arrayIndex)
+
+        cell.setupDatesTableViewCell(date: HabitsStore.shared.dates[arrayIndex[indexPath.row]], number: indexHabitInArray, indexPath: indexPath, indexDate: arrayIndex[indexPath.row] )
+        
         return cell
     }
 

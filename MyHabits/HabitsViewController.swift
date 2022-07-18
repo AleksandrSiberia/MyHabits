@@ -19,8 +19,6 @@ class HabitsViewController: UIViewController {
         labelToday.translatesAutoresizingMaskIntoConstraints = false
         labelToday.text = "Сегодня"
         labelToday.font = UIFont(name: "SFProDisplay-Semibold", size: 20)
-
-
         return labelToday
     }()
 
@@ -49,8 +47,6 @@ class HabitsViewController: UIViewController {
         [labelToday, collectionViewHabits].forEach({ self.view.addSubview($0) })
         setupConstraints()
         self.navigationItem.rightBarButtonItem = buttonAddHabit
-
-        print(HabitsStore.shared.habits.count)
 
     }
 
@@ -97,6 +93,7 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
         return cell
         }
 
+
         let cell = collectionViewHabits.dequeueReusableCell(withReuseIdentifier: HabitCollectionViewCell.nameCollectionCell, for: indexPath) as! HabitCollectionViewCell
 
         cell.layer.cornerRadius = 10
@@ -107,7 +104,7 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+
         HabitsStore.shared.habits.count + 1
     }
 
@@ -116,12 +113,11 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
         let screenWidth = UIScreen.main.bounds.width
         let widthItem = screenWidth - flowLayoutCollectionViewHabits.sectionInset.left - flowLayoutCollectionViewHabits.sectionInset.right
 
-        print(indexPath)
 
         guard indexPath.row != 0 else {
             return CGSize(width: widthItem, height: 77)
         }
-        return CGSize(width: widthItem, height: 200)
+        return CGSize(width: widthItem, height: 170)
     }
 
 
@@ -135,7 +131,6 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
             self.navigationController?.pushViewController(habitDetailsViewController, animated: true)
         }
-
     }
 }
 

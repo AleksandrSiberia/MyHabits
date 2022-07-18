@@ -57,9 +57,9 @@ class DatesTableViewCell: UITableViewCell {
     }
 
     
-    func setupDatesTableViewCell(date: Date, number: Int, indexPath: IndexPath) {
+    func setupDatesTableViewCell(date: Date, number: Int, indexPath: IndexPath, indexDate: Int) {
 
-        let stringDate = HabitsStore.shared.trackDateString(forIndex: indexPath.item)
+        let stringDate = HabitsStore.shared.trackDateString(forIndex: indexDate)
 
         self.labelDate.text = stringDate
 
