@@ -48,7 +48,7 @@ class DatesTableViewCell: UITableViewCell {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             self.labelDate.topAnchor.constraint(equalTo: self.topAnchor),
-            self.labelDate.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.labelDate.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 14),
             self.labelDate.bottomAnchor.constraint(equalTo: self.bottomAnchor),
 
             self.imageViewTracked.centerYAnchor.constraint(equalTo: self.labelDate.centerYAnchor),

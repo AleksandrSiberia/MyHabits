@@ -62,9 +62,18 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.labelPrecent.text = "\(round(HabitsStore.shared.todayProgress * 100)) %"
+    }
+
+    
     func setNewProgress() {
         self.labelPrecent.text = "\(HabitsStore.shared.todayProgress * 100) %"
     }
+
+
 
     private func setupConstraints() {
 

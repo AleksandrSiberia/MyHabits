@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         navInfoViewController.tabBarItem = UITabBarItem(title: "Информация", image: UIImage(systemName: "info.circle.fill"), tag: 2)
 
-
+        
         window = UIWindow.init(windowScene: windowScene)
         window?.rootViewController = tapBarController
         window?.makeKeyAndVisible()

@@ -29,6 +29,7 @@ class InfoViewController: UIViewController {
         labelInfo.text = "Привычка за 21 день"
         labelInfo.translatesAutoresizingMaskIntoConstraints = false
         labelInfo.numberOfLines = 0
+        labelInfo.font = UIFont(name: "SFProText-Semibold", size: 20)
         return labelInfo
     }()
 
@@ -64,7 +65,8 @@ class InfoViewController: UIViewController {
             self.stackViewInfo.widthAnchor.constraint(equalTo: self.scrollViewInfo.widthAnchor),
             self.stackViewInfo.bottomAnchor.constraint(equalTo: self.scrollViewInfo.bottomAnchor),
 
-            self.labelInfo.topAnchor.constraint(equalTo: self.stackViewInfo.topAnchor),
+            self.labelInfo.topAnchor.constraint(equalTo: self.stackViewInfo.topAnchor, constant: 14),
+            self.labelInfo.leadingAnchor.constraint(equalTo: self.stackViewInfo.leadingAnchor, constant: 14),
 
             self.labelTextInfo.topAnchor.constraint(equalTo: self.labelInfo.bottomAnchor, constant: 14),
             self.labelTextInfo.leadingAnchor.constraint(equalTo: self.stackViewInfo.leadingAnchor, constant: 14),

@@ -27,18 +27,21 @@ class HabitViewController: UIViewController {
 
     private lazy var buttonNavLeft: UIBarButtonItem = {
         var buttonNavLeft = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(actionButtonNavLeft))
+        buttonNavLeft.tintColor = UIColor(named: "Violet")
         return buttonNavLeft
     }()
 
     private lazy var buttonNavRight: UIBarButtonItem = {
         var buttonNavRight = UIBarButtonItem( title: "Сохранить", style: .plain, target: self, action: #selector(actionButtonNavRight))
+        buttonNavRight.tintColor = UIColor(named: "Violet")
         return buttonNavRight
     }()
 
     private lazy var labelNameHabit: UILabel = {
         var labelNameHabit = UILabel()
         labelNameHabit.translatesAutoresizingMaskIntoConstraints = false
-        labelNameHabit.text = "Напишите название привычки"
+        labelNameHabit.text = "Название"
+        labelNameHabit.font = UIFont(name: "SFProText-Semibold", size: 17)
         return labelNameHabit
     }()
 
@@ -58,6 +61,7 @@ class HabitViewController: UIViewController {
         let labelColor = UILabel()
         labelColor.translatesAutoresizingMaskIntoConstraints = false
         labelColor.text = "Цвет"
+        labelColor.font = UIFont(name: "SFProText-Semibold", size: 17)
         return labelColor
     }()
 
@@ -72,7 +76,8 @@ class HabitViewController: UIViewController {
     private lazy var labelDate: UILabel = {
         var labelDate = UILabel()
         labelDate.translatesAutoresizingMaskIntoConstraints = false
-        labelDate.text = "Задайте время"
+        labelDate.text = "Время"
+        labelDate.font = UIFont(name: "SFProText-Semibold", size: 17)
         return labelDate
     }()
 
@@ -80,6 +85,7 @@ class HabitViewController: UIViewController {
         var labelEveryday = UILabel()
         labelEveryday.translatesAutoresizingMaskIntoConstraints = false
         labelEveryday.text = "Каждый день в"
+        labelEveryday.font = UIFont(name: "SFProText-Regular", size: 17)
         return labelEveryday
     }()
 
@@ -110,7 +116,6 @@ class HabitViewController: UIViewController {
         [labelNameHabit, textFieldNameNewHabit, labelColor, colorView, labelDate, labelEveryday, datePicker, buttonDelateHabit].forEach({ self.view.addSubview($0) })
         self.navigationItem.rightBarButtonItem = self.buttonNavRight
         self.navigationItem.leftBarButtonItem = self.buttonNavLeft
-
 
         setupGesture()
         setupConstrains()
@@ -213,6 +218,7 @@ class HabitViewController: UIViewController {
 
         let habitsViewController = HabitsViewController()
         habitsViewController.reloadCollectionViewHabits()
+        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true)
     }
 
@@ -225,6 +231,7 @@ class HabitViewController: UIViewController {
         present(colorPicker, animated: true)
     }
 
+
     @objc private func actionButtonDelateHabit() {
 
         let alert = UIAlertController(title: "Удалить привычку", message: "Вы хотите удалить привычку - \(HabitsStore.shared.habits[indexHabitInArray].name) ", preferredStyle: .alert)
@@ -236,18 +243,16 @@ class HabitViewController: UIViewController {
 
 
         let actionDelete = UIAlertAction(title: "Удалить", style: .destructive) { _ in
+
+
             HabitsStore.shared.habits.remove(at: self.indexHabitInArray)
 
-            let habitDetailsViewController = HabitDetailsViewController()
-            habitDetailsViewController.dismiss(animated: true)
-            
-            self.dismiss(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
 
+            self.dismiss(animated: true)
         }
         alert.addAction(actionDelete)
         present(alert, animated: true)
-
-
     }
 }
 

@@ -44,11 +44,18 @@ class HabitDetailsViewController: UIViewController {
         [labelActivity, tableViewDate].forEach({ self.view.addSubview($0) })
         setupConstraints()
         self.navigationItem.rightBarButtonItem = barButtonRight
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+    }
+
+
+
+    func popHabitDetailsViewController() {
+        self.navigationController?.popViewController(animated: true)
     }
 
 
@@ -71,8 +78,8 @@ class HabitDetailsViewController: UIViewController {
             self.labelActivity.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 14),
 
             self.tableViewDate.topAnchor.constraint(equalTo: self.labelActivity.bottomAnchor, constant: 14),
-            self.tableViewDate.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 14),
-            self.tableViewDate.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -14),
+            self.tableViewDate.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.tableViewDate.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.tableViewDate.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -14),
         ])
     }
@@ -80,6 +87,7 @@ class HabitDetailsViewController: UIViewController {
     @objc func actionBarButtonRight() {
         let habitViewController = HabitViewController()
         let navHabitViewController = UINavigationController(rootViewController: habitViewController)
+
         self.navigationController?.present(navHabitViewController, animated: true)
 
         habitViewController.setupHabitViewController(habit: HabitsStore.shared.habits[indexHabitInArray], indexHabit: indexHabitInArray)
@@ -100,4 +108,9 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
         cell.setupDatesTableViewCell(date: HabitsStore.shared.dates[indexPath.row], number: indexHabitInArray, indexPath: indexPath )
         return cell
     }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        40
+    }
+
 }

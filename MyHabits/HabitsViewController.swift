@@ -50,6 +50,8 @@ class HabitsViewController: UIViewController {
         setupConstraints()
         self.navigationItem.rightBarButtonItem = buttonAddHabit
 
+        print(HabitsStore.shared.habits.count)
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -105,6 +107,7 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         HabitsStore.shared.habits.count + 1
     }
 
@@ -112,34 +115,28 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenWidth = UIScreen.main.bounds.width
         let widthItem = screenWidth - flowLayoutCollectionViewHabits.sectionInset.left - flowLayoutCollectionViewHabits.sectionInset.right
+
+        print(indexPath)
+
         guard indexPath.row != 0 else {
             return CGSize(width: widthItem, height: 77)
         }
-        return CGSize(width: widthItem, height: 130)
+        return CGSize(width: widthItem, height: 200)
     }
 
 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if indexPath.row != 0 {
-        let habitDetailsViewController = HabitDetailsViewController()
-                habitDetailsViewController.setupHabitDetailsViewController(indexPith: indexPath)
 
-        self.navigationController?.pushViewController(habitDetailsViewController, animated: true)
+        if indexPath.row != 0 {
+            let habitDetailsViewController = HabitDetailsViewController()
+            habitDetailsViewController.setupHabitDetailsViewController(indexPith: indexPath)
+
+
+            self.navigationController?.pushViewController(habitDetailsViewController, animated: true)
         }
 
-
-
-
-
-
-        
-
-
     }
-
-
 }
 
 
