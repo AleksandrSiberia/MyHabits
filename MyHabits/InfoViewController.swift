@@ -21,6 +21,7 @@ class InfoViewController: UIViewController {
         var stackViewInfo = UIStackView()
         stackViewInfo.translatesAutoresizingMaskIntoConstraints = false
         stackViewInfo.axis = .vertical
+        stackViewInfo.backgroundColor = .white
         return stackViewInfo
     }()
 
@@ -44,7 +45,7 @@ class InfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemBackground
+
         self.navigationController?.navigationBar.backgroundColor = .systemGray6
         self.navigationItem.title = "Информация"
         [scrollViewInfo].forEach({ self.view.addSubview($0)})
@@ -52,11 +53,12 @@ class InfoViewController: UIViewController {
         self.stackViewInfo.addSubview(self.labelInfo)
         self.stackViewInfo.addSubview(self.labelTextInfo)
         setupConstraints()
+        self.view.backgroundColor = .systemGray6
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            self.scrollViewInfo.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.scrollViewInfo.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.scrollViewInfo.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.scrollViewInfo.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.scrollViewInfo.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),

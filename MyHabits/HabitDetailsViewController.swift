@@ -46,6 +46,10 @@ class HabitDetailsViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = barButtonRight
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.backgroundColor = UIColor(named: "customGrey")
+    }
 
 
     func setupHabitDetailsViewController(indexPith: IndexPath) {

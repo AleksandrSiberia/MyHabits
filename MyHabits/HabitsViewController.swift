@@ -47,12 +47,12 @@ class HabitsViewController: UIViewController {
         [labelToday, collectionViewHabits].forEach({ self.view.addSubview($0) })
         setupConstraints()
         self.navigationItem.rightBarButtonItem = buttonAddHabit
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.collectionViewHabits.reloadData()
+        self.navigationController?.navigationBar.backgroundColor = .white
 
     }
 
