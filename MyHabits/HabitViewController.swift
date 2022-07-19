@@ -60,6 +60,8 @@ class HabitViewController: UIViewController {
         textFieldNameNewHabit.backgroundColor = .systemGray6
         textFieldNameNewHabit.layer.cornerRadius = 10
         textFieldNameNewHabit.addTarget(self, action: #selector(actionTextFieldNameNewHabit), for: .editingChanged)
+        textFieldNameNewHabit.font = UIFont(name: "SFProText-Semibold", size: 17)
+        textFieldNameNewHabit.textColor = UIColor(named: "customBlue")
         return textFieldNameNewHabit
     }()
 

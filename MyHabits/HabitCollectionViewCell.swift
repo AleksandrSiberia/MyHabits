@@ -116,6 +116,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             self.labelHabitName.topAnchor.constraint(equalTo: self.topAnchor, constant: 14),
             self.labelHabitName.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 14),
+            self.labelHabitName.trailingAnchor.constraint(equalTo: self.viewTrack.leadingAnchor, constant: -30),
 
             self.labelTimeHabit.topAnchor.constraint(equalTo: self.labelHabitName.bottomAnchor, constant: 7),
             self.labelTimeHabit.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 14),
