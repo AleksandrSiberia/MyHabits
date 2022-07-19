@@ -78,10 +78,14 @@ class HabitsViewController: UIViewController {
  
     @objc private func actionButtonAddHabit() {
 
+        let habitViewController = HabitViewController()
         let navHabitViewController = UINavigationController(rootViewController: HabitViewController())
         self.navigationController?.present(navHabitViewController, animated: true)
+
+        habitViewController.textFieldFirstResponder()
     }
 }
+
 
 extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
@@ -104,7 +108,6 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
         HabitsStore.shared.habits.count + 1
     }
 
@@ -127,7 +130,6 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
         if indexPath.row != 0 {
             let habitDetailsViewController = HabitDetailsViewController()
             habitDetailsViewController.setupHabitDetailsViewController(indexPith: indexPath)
-
 
             self.navigationController?.pushViewController(habitDetailsViewController, animated: true)
         }

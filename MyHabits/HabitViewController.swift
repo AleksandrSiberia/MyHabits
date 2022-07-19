@@ -10,6 +10,11 @@ import UIKit
 
 class HabitViewController: UIViewController {
 
+    private lazy var titleNavigationItem: String = {
+        var titleNavigationBar = "Создать"
+        return titleNavigationBar
+    }()
+
     private lazy var indexHabitInArray: Int = {
         var numberHabitInArray = Int()
         return numberHabitInArray
@@ -112,7 +117,7 @@ class HabitViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.backgroundColor = .systemGray6
-        self.navigationItem.title = "Создать"
+        self.navigationItem.title = self.titleNavigationItem
         [labelNameHabit, textFieldNameNewHabit, labelColor, colorView, labelDate, labelEveryday, datePicker, buttonDelateHabit].forEach({ self.view.addSubview($0) })
         self.navigationItem.rightBarButtonItem = self.buttonNavRight
         self.navigationItem.leftBarButtonItem = self.buttonNavLeft
@@ -126,7 +131,6 @@ class HabitViewController: UIViewController {
         NSLayoutConstraint.activate([
             self.labelNameHabit.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 14),
             self.labelNameHabit.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant:  14),
-
 
             self.textFieldNameNewHabit.topAnchor.constraint(equalTo: self.labelNameHabit.bottomAnchor, constant: 14),
             self.textFieldNameNewHabit.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 14),
@@ -155,15 +159,20 @@ class HabitViewController: UIViewController {
     }
 
     func setupHabitViewController(habit: Habit, indexHabit: Int) {
+
         self.textFieldNameNewHabit.text = habit.name
         self.colorView.backgroundColor = habit.color
         self.datePicker.date = habit.date
         self.indexHabitInArray = indexHabit
+        self.titleNavigationItem = "Править"
         self.buttonDelateHabit.isHidden = false
         self.buttonNavRight = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(actionResaveButtonNavRight))
     }
 
-    
+    func textFieldFirstResponder() {
+        self.textFieldNameNewHabit.becomeFirstResponder()
+    }
+
     private func setupGesture() {
         let gesture = UITapGestureRecognizer()
         gesture.addTarget(self, action: #selector(actionGestureColorView))
@@ -185,6 +194,7 @@ class HabitViewController: UIViewController {
 
     @objc private func actionButtonNavLeft() {
         self.dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
 
     @objc private func actionButtonNavRight() {
@@ -219,7 +229,6 @@ class HabitViewController: UIViewController {
         let habitsViewController = HabitsViewController()
         habitsViewController.reloadCollectionViewHabits()
         self.navigationController?.popViewController(animated: true)
-        self.dismiss(animated: true)
     }
 
 

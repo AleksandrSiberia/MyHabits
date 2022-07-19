@@ -20,6 +20,14 @@ class HabitCollectionViewCell: UICollectionViewCell {
         return colorBackgroundViewTrack
     }()
 
+    private lazy var dateFormatter: DateFormatter = {
+        var dateFormatter = DateFormatter()
+        dateFormatter.locale = .init(identifier: "ru_RU")
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        return dateFormatter
+    }()
+
     private lazy var labelHabitName: UILabel = {
         var labelHabitName = UILabel()
         labelHabitName.translatesAutoresizingMaskIntoConstraints = false
@@ -93,8 +101,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        labelHabitName.textColor = self.colorBackgroundViewTrack
-
+        self.labelHabitName.textColor = self.colorBackgroundViewTrack
     }
 
 
@@ -120,7 +127,6 @@ class HabitCollectionViewCell: UICollectionViewCell {
             self.labelCounter.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 14),
             self.labelCounter.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -14),
 
-
             self.viewTrack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -14),
             self.viewTrack.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             self.viewTrack.widthAnchor.constraint(equalToConstant: 40),
@@ -136,7 +142,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
 
     func setupContent(_ habit: Habit, indexPath: IndexPath ) {
         self.labelHabitName.text = habit.name
-        self.labelDateTimeHabit.text = "\(habit.date)"
+
+        self.labelDateTimeHabit.text = self.dateFormatter.string(from: habit.date)
         self.viewTrack.layer.borderColor = habit.color.cgColor
         self.colorBackgroundViewTrack = habit.color
         self.indexHabitInArray = indexPath.item - 1

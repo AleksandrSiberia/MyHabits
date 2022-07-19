@@ -46,16 +46,6 @@ class HabitDetailsViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = barButtonRight
     }
 
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
-
-
-    func popHabitDetailsViewController() {
-        self.navigationController?.popViewController(animated: true)
-    }
 
 
     func setupHabitDetailsViewController(indexPith: IndexPath) {
@@ -85,13 +75,10 @@ class HabitDetailsViewController: UIViewController {
 
     @objc func actionBarButtonRight() {
         let habitViewController = HabitViewController()
-        let navHabitViewController = UINavigationController(rootViewController: habitViewController)
-
-        self.navigationController?.present(navHabitViewController, animated: true)
+        self.navigationController?.pushViewController(habitViewController, animated: true)
 
         habitViewController.setupHabitViewController(habit: HabitsStore.shared.habits[indexHabitInArray], indexHabit: indexHabitInArray)
     }
-
 }
 
 extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -103,15 +90,12 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DatesTableViewCell.nameTableViewCell, for: indexPath) as! DatesTableViewCell
 
-    //    let sortedArrayDate = HabitsStore.shared.dates.sorted(by: >)
-
         var arrayIndex:[Int] = []
         var dateIndex = HabitsStore.shared.dates.count - 1
         while dateIndex >= 0 {
             arrayIndex.append(dateIndex)
             dateIndex -= 1
         }
-        print(arrayIndex)
 
         cell.setupDatesTableViewCell(date: HabitsStore.shared.dates[arrayIndex[indexPath.row]], number: indexHabitInArray, indexPath: indexPath, indexDate: arrayIndex[indexPath.row] )
         
@@ -121,5 +105,4 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         40
     }
-
 }
