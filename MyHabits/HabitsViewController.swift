@@ -78,11 +78,11 @@ class HabitsViewController: UIViewController {
  
     @objc private func actionButtonAddHabit() {
 
-        let habitViewController = HabitViewController()
         let navHabitViewController = UINavigationController(rootViewController: HabitViewController())
+        
         self.navigationController?.present(navHabitViewController, animated: true)
 
-        habitViewController.textFieldFirstResponder()
+
     }
 }
 

@@ -10,6 +10,7 @@ import UIKit
 
 class HabitViewController: UIViewController {
 
+
     private lazy var titleNavigationItem: String = {
         var titleNavigationBar = "Создать"
         return titleNavigationBar
@@ -121,6 +122,8 @@ class HabitViewController: UIViewController {
         [labelNameHabit, textFieldNameNewHabit, labelColor, colorView, labelDate, labelEveryday, datePicker, buttonDelateHabit].forEach({ self.view.addSubview($0) })
         self.navigationItem.rightBarButtonItem = self.buttonNavRight
         self.navigationItem.leftBarButtonItem = self.buttonNavLeft
+        func rr() {
+        }
 
         setupGesture()
         setupConstrains()
@@ -169,9 +172,6 @@ class HabitViewController: UIViewController {
         self.buttonNavRight = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(actionResaveButtonNavRight))
     }
 
-    func textFieldFirstResponder() {
-        self.textFieldNameNewHabit.becomeFirstResponder()
-    }
 
     private func setupGesture() {
         let gesture = UITapGestureRecognizer()
