@@ -10,26 +10,20 @@ import UIKit
 
 class HabitViewController: UIViewController {
 
+    var notifyNeedTextFieldFirstResponder: ( () -> Void )?
+
+    var delegate: HabitViewControllerDelegate?
+
+    private var indexHabitInArray: Int?
+
+    private var nameNewHabit: String?
+
+    private var dateNewHabit: Date = Date()
 
     private lazy var titleNavigationItem: String = {
-        var titleNavigationBar = "Создать"
-        return titleNavigationBar
-    }()
-
-    private lazy var indexHabitInArray: Int = {
-        var numberHabitInArray = Int()
-        return numberHabitInArray
-    }()
-
-    private lazy var nameNewHabit: String? = {
-        var nameNewHabit: String?
-        return nameNewHabit
-    }()
-
-    private lazy var dateNewHabit: Date? = {
-        var dateNewHabit: Date = Date()
-        return dateNewHabit
-    }()
+           var titleNavigationBar = "Создать"
+           return titleNavigationBar
+       }()
 
     private lazy var buttonNavLeft: UIBarButtonItem = {
         var buttonNavLeft = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(actionButtonNavLeft))
@@ -51,8 +45,7 @@ class HabitViewController: UIViewController {
         return labelNameHabit
     }()
 
-    private lazy var textFieldNameNewHabit: UITextField = {
-
+    lazy var textFieldNameNewHabit: UITextField = {
         var textFieldNameNewHabit = UITextField()
         textFieldNameNewHabit.translatesAutoresizingMaskIntoConstraints = false
         textFieldNameNewHabit.delegate = self
@@ -124,8 +117,12 @@ class HabitViewController: UIViewController {
         [labelNameHabit, textFieldNameNewHabit, labelColor, colorView, labelDate, labelEveryday, datePicker, buttonDelateHabit].forEach({ self.view.addSubview($0) })
         self.navigationItem.rightBarButtonItem = self.buttonNavRight
         self.navigationItem.leftBarButtonItem = self.buttonNavLeft
-        func rr() {
-        }
+
+        self.notifyNeedTextFieldFirstResponder?()
+
+//        if self.titleNavigationItem == "Создать" {
+//            self.textFieldNameNewHabit.becomeFirstResponder()
+//        }
 
         setupGesture()
         setupConstrains()
@@ -163,8 +160,11 @@ class HabitViewController: UIViewController {
         ])
     }
 
-    func setupHabitViewController(habit: Habit, indexHabit: Int) {
+    func onTextFieldFirstResponder() {
+        self.textFieldNameNewHabit.becomeFirstResponder()
+    }
 
+    func setupHabitViewController(habit: Habit, indexHabit: Int) {
         self.textFieldNameNewHabit.text = habit.name
         self.colorView.backgroundColor = habit.color
         self.datePicker.date = habit.date
@@ -173,7 +173,6 @@ class HabitViewController: UIViewController {
         self.buttonDelateHabit.isHidden = false
         self.buttonNavRight = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(actionResaveButtonNavRight))
     }
-
 
     private func setupGesture() {
         let gesture = UITapGestureRecognizer()
@@ -191,7 +190,7 @@ class HabitViewController: UIViewController {
 
     @objc private func actionDatePicker() {
         self.dateNewHabit = datePicker.date
-        print(dateNewHabit!)
+        print(dateNewHabit)
     }
 
     @objc private func actionButtonNavLeft() {
@@ -201,35 +200,35 @@ class HabitViewController: UIViewController {
 
     @objc private func actionButtonNavRight() {
 
-        if nameNewHabit != nil && colorView.backgroundColor != nil && dateNewHabit != nil  {
+        if nameNewHabit != nil && colorView.backgroundColor != nil  {
         let newHabit = Habit(name: self.nameNewHabit!,
-                             date: self.dateNewHabit!,
+                             date: self.dateNewHabit,
                              color: self.colorView.backgroundColor!)
         let store = HabitsStore.shared
             store.habits.insert(newHabit, at: 0)
 
-        let habitsViewController = HabitsViewController()
-        habitsViewController.reloadCollectionViewHabits()
+            self.delegate?.notifyNeedReloadCollectionView()
+            
         self.dismiss(animated: true)
         }
-        else if nameNewHabit == nil || dateNewHabit == nil {
+        else if nameNewHabit == nil {
             print("Напишите название привычки")
     }
     }
 
 
     @objc private func actionResaveButtonNavRight() {
-        let editedHabit = HabitsStore.shared.habits.remove(at: indexHabitInArray)
+        let editedHabit = HabitsStore.shared.habits.remove(at: indexHabitInArray!)
 
         if self.colorView.backgroundColor != nil && self.textFieldNameNewHabit.text != nil {
         editedHabit.color = self.colorView.backgroundColor!
         editedHabit.date = self.datePicker.date
         editedHabit.name = self.textFieldNameNewHabit.text!
         }
-        HabitsStore.shared.habits.insert(editedHabit, at: indexHabitInArray)
+        HabitsStore.shared.habits.insert(editedHabit, at: indexHabitInArray!)
 
-        let habitsViewController = HabitsViewController()
-        habitsViewController.reloadCollectionViewHabits()
+
+
         self.navigationController?.popViewController(animated: true)
     }
 
@@ -245,7 +244,7 @@ class HabitViewController: UIViewController {
 
     @objc private func actionButtonDelateHabit() {
 
-        let alert = UIAlertController(title: "Удалить привычку", message: "Вы хотите удалить привычку - \(HabitsStore.shared.habits[indexHabitInArray].name) ", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Удалить привычку", message: "Вы хотите удалить привычку - \(HabitsStore.shared.habits[indexHabitInArray!].name) ", preferredStyle: .alert)
 
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel) { _ in
             print("cancel")
@@ -254,12 +253,8 @@ class HabitViewController: UIViewController {
 
 
         let actionDelete = UIAlertAction(title: "Удалить", style: .destructive) { _ in
-
-
-            HabitsStore.shared.habits.remove(at: self.indexHabitInArray)
-
+            HabitsStore.shared.habits.remove(at: self.indexHabitInArray!)
             self.navigationController?.popToRootViewController(animated: true)
-
             self.dismiss(animated: true)
         }
         alert.addAction(actionDelete)

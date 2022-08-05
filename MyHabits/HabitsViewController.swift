@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol HabitViewControllerDelegate {
+    func notifyNeedReloadCollectionView()
+}
+
 class HabitsViewController: UIViewController {
 
     private lazy var buttonAddHabit: UIBarButtonItem = {
@@ -47,18 +51,15 @@ class HabitsViewController: UIViewController {
         [labelToday, collectionViewHabits].forEach({ self.view.addSubview($0) })
         setupConstraints()
         self.navigationItem.rightBarButtonItem = buttonAddHabit
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.collectionViewHabits.reloadData()
         self.navigationController?.navigationBar.backgroundColor = .white
-
     }
 
-    func reloadCollectionViewHabits() {
-        self.collectionViewHabits.reloadData()
-    }
 
 
     func setupConstraints() {
@@ -78,11 +79,17 @@ class HabitsViewController: UIViewController {
  
     @objc private func actionButtonAddHabit() {
 
-        let navHabitViewController = UINavigationController(rootViewController: HabitViewController())
-        
+        let habitViewController = HabitViewController()
+
+        habitViewController.delegate = self
+
+        habitViewController.notifyNeedTextFieldFirstResponder = { 
+            habitViewController.onTextFieldFirstResponder()
+        }
+
+        let navHabitViewController = UINavigationController(rootViewController: habitViewController)
+
         self.navigationController?.present(navHabitViewController, animated: true)
-
-
     }
 }
 
@@ -128,11 +135,19 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         if indexPath.row != 0 {
+
             let habitDetailsViewController = HabitDetailsViewController()
             habitDetailsViewController.setupHabitDetailsViewController(indexPith: indexPath)
 
             self.navigationController?.pushViewController(habitDetailsViewController, animated: true)
         }
+    }
+}
+
+extension HabitsViewController: HabitViewControllerDelegate {
+
+    func notifyNeedReloadCollectionView() {
+        self.collectionViewHabits.reloadData()
     }
 }
 

@@ -68,19 +68,16 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         self.labelPrecent.text = "\(round(HabitsStore.shared.todayProgress * 100)) %"
         let widthViewProgress = UIScreen.main.bounds.width - 14 - 14 - 14 - 14
         let widthViewColorProgress = widthViewProgress * CGFloat(HabitsStore.shared.todayProgress)
+
         NSLayoutConstraint.activate([
             self.viewColorProgress.widthAnchor.constraint(equalToConstant: widthViewColorProgress)
         ])
     }
 
-    
-    func setNewProgress() {
-        self.labelPrecent.text = "\(HabitsStore.shared.todayProgress * 100) %"
-    }
-
-
 
     private func setupConstraints() {
+//        let widthViewProgress = UIScreen.main.bounds.width - 14 - 14 - 14 - 14
+//        let widthViewColorProgress = widthViewProgress * CGFloat(HabitsStore.shared.todayProgress)
 
         NSLayoutConstraint.activate([
             self.labelMotivation.topAnchor.constraint(equalTo: self.topAnchor, constant: 14),
@@ -97,6 +94,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
             self.viewColorProgress.topAnchor.constraint(equalTo: self.viewProgress.topAnchor),
             self.viewColorProgress.leadingAnchor.constraint(equalTo: self.viewProgress.leadingAnchor),
             self.viewColorProgress.bottomAnchor.constraint(equalTo: self.viewProgress.bottomAnchor),
+//            self.viewColorProgress.widthAnchor.constraint(equalToConstant: widthViewColorProgress)
 
         ])
     }

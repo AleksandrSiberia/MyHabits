@@ -9,10 +9,7 @@ import UIKit
 
 class HabitDetailsViewController: UIViewController {
 
-    private lazy var indexHabitInArray: Int = {
-        var indexHabitInArray = Int()
-        return indexHabitInArray
-    }()
+    private var indexHabitInArray: Int?
 
     private var nameHabit: String?
 
@@ -79,9 +76,13 @@ class HabitDetailsViewController: UIViewController {
 
     @objc func actionBarButtonRight() {
         let habitViewController = HabitViewController()
+
         self.navigationController?.pushViewController(habitViewController, animated: true)
 
-        habitViewController.setupHabitViewController(habit: HabitsStore.shared.habits[indexHabitInArray], indexHabit: indexHabitInArray)
+        habitViewController.setupHabitViewController(habit: HabitsStore.shared.habits[indexHabitInArray!], indexHabit: indexHabitInArray!)
+
+
+
     }
 }
 
@@ -101,7 +102,7 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
             dateIndex -= 1
         }
 
-        cell.setupDatesTableViewCell(date: HabitsStore.shared.dates[arrayIndex[indexPath.row]], number: indexHabitInArray, indexPath: indexPath, indexDate: arrayIndex[indexPath.row] )
+        cell.setupDatesTableViewCell(date: HabitsStore.shared.dates[arrayIndex[indexPath.row]], number: indexHabitInArray!, indexPath: indexPath, indexDate: arrayIndex[indexPath.row] )
         
         return cell
     }

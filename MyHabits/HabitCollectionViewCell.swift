@@ -10,10 +10,8 @@ import UIKit
 class HabitCollectionViewCell: UICollectionViewCell {
 
 
-    private lazy var indexHabitInArray: Int = {
-        var numberHabitInArray = Int()
-        return numberHabitInArray
-    }()
+    private var indexHabitInArray: Int?
+
 
     private lazy var colorBackgroundViewTrack: UIColor = {
         var colorBackgroundViewTrack = UIColor()
@@ -165,16 +163,12 @@ class HabitCollectionViewCell: UICollectionViewCell {
 
     @objc private func actionGestureRecognizer() {
 
-        if HabitsStore.shared.habits[indexHabitInArray].isAlreadyTakenToday == false {
-        HabitsStore.shared.track(HabitsStore.shared.habits[indexHabitInArray])
+        if HabitsStore.shared.habits[indexHabitInArray!].isAlreadyTakenToday == false {
+        HabitsStore.shared.track(HabitsStore.shared.habits[indexHabitInArray!])
         }
 
         self.viewTrack.backgroundColor = self.colorBackgroundViewTrack
         self.imageCheckMark.isHidden = false
-
-
-        let habitsViewController = HabitsViewController()
-        habitsViewController.reloadCollectionViewHabits()
 
     }
 }
