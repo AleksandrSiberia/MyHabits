@@ -7,11 +7,14 @@
 
 import UIKit
 
-protocol HabitViewControllerDelegate {
+protocol HabitsViewControllerDelegate {
     func notifyNeedReloadCollectionView()
 }
 
+
 class HabitsViewController: UIViewController {
+
+    private var progressCell: ProgressCollectionViewCell?
 
     private lazy var buttonAddHabit: UIBarButtonItem = {
         var buttonAddHabit = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(actionButtonAddHabit))
@@ -47,6 +50,7 @@ class HabitsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.view.backgroundColor = .systemBackground
         [labelToday, collectionViewHabits].forEach({ self.view.addSubview($0) })
         setupConstraints()
@@ -57,9 +61,7 @@ class HabitsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.collectionViewHabits.reloadData()
-        self.navigationController?.navigationBar.backgroundColor = .white
     }
-
 
 
     func setupConstraints() {
@@ -81,7 +83,9 @@ class HabitsViewController: UIViewController {
 
         let habitViewController = HabitViewController()
 
-        habitViewController.delegate = self
+        habitViewController.delegateReload = self
+
+        habitViewController.delegateWidth = self.progressCell
 
         habitViewController.notifyNeedTextFieldFirstResponder = { 
             habitViewController.onTextFieldFirstResponder()
@@ -98,17 +102,21 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard indexPath.row != 0 else {
-        let cell = collectionViewHabits.dequeueReusableCell(withReuseIdentifier: ProgressCollectionViewCell.nameCollectionCell, for: indexPath)
-        cell.layer.cornerRadius = 10
-        return cell
+
+        guard indexPath.row == 0 else {
+            let cell = collectionViewHabits.dequeueReusableCell(withReuseIdentifier: HabitCollectionViewCell.nameCollectionCell, for: indexPath) as! HabitCollectionViewCell
+            cell.layer.cornerRadius = 10
+            cell.setupContent(HabitsStore.shared.habits[indexPath.item - 1], indexPath: indexPath)
+            cell.delegateReload = self
+            cell.delegateWidth = progressCell
+            return cell
         }
 
-
-        let cell = collectionViewHabits.dequeueReusableCell(withReuseIdentifier: HabitCollectionViewCell.nameCollectionCell, for: indexPath) as! HabitCollectionViewCell
-
+        let cell = collectionViewHabits.dequeueReusableCell(withReuseIdentifier: ProgressCollectionViewCell.nameCollectionCell, for: indexPath)
         cell.layer.cornerRadius = 10
-        cell.setupContent(HabitsStore.shared.habits[indexPath.item - 1], indexPath: indexPath)
+        self.progressCell = (cell as! ProgressCollectionViewCell)
+
+
         return cell
 
     }
@@ -131,7 +139,6 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
 
 
-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         if indexPath.row != 0 {
@@ -144,12 +151,14 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
 }
 
-extension HabitsViewController: HabitViewControllerDelegate {
+extension HabitsViewController: HabitsViewControllerDelegate {
 
     func notifyNeedReloadCollectionView() {
         self.collectionViewHabits.reloadData()
     }
 }
+
+
 
 
 

@@ -12,7 +12,11 @@ class HabitViewController: UIViewController {
 
     var notifyNeedTextFieldFirstResponder: ( () -> Void )?
 
-    var delegate: HabitViewControllerDelegate?
+    var delegateReload: HabitsViewControllerDelegate?
+
+    var delegatePop: HabitDetailsViewControllerDelegate?
+
+    var delegateWidth: ProgressCollectionViewCellDelegate?
 
     private var indexHabitInArray: Int?
 
@@ -117,13 +121,7 @@ class HabitViewController: UIViewController {
         [labelNameHabit, textFieldNameNewHabit, labelColor, colorView, labelDate, labelEveryday, datePicker, buttonDelateHabit].forEach({ self.view.addSubview($0) })
         self.navigationItem.rightBarButtonItem = self.buttonNavRight
         self.navigationItem.leftBarButtonItem = self.buttonNavLeft
-
         self.notifyNeedTextFieldFirstResponder?()
-
-//        if self.titleNavigationItem == "Создать" {
-//            self.textFieldNameNewHabit.becomeFirstResponder()
-//        }
-
         setupGesture()
         setupConstrains()
     }
@@ -195,7 +193,6 @@ class HabitViewController: UIViewController {
 
     @objc private func actionButtonNavLeft() {
         self.dismiss(animated: true)
-        self.navigationController?.popViewController(animated: true)
     }
 
     @objc private func actionButtonNavRight() {
@@ -207,9 +204,12 @@ class HabitViewController: UIViewController {
         let store = HabitsStore.shared
             store.habits.insert(newHabit, at: 0)
 
-            self.delegate?.notifyNeedReloadCollectionView()
+        self.delegateReload?.notifyNeedReloadCollectionView()
+
+        self.delegateWidth?.notifyNeedNewWidthViewColorProgress()
             
         self.dismiss(animated: true)
+
         }
         else if nameNewHabit == nil {
             print("Напишите название привычки")
@@ -226,9 +226,7 @@ class HabitViewController: UIViewController {
         editedHabit.name = self.textFieldNameNewHabit.text!
         }
         HabitsStore.shared.habits.insert(editedHabit, at: indexHabitInArray!)
-
-
-
+        
         self.navigationController?.popViewController(animated: true)
     }
 
@@ -254,7 +252,7 @@ class HabitViewController: UIViewController {
 
         let actionDelete = UIAlertAction(title: "Удалить", style: .destructive) { _ in
             HabitsStore.shared.habits.remove(at: self.indexHabitInArray!)
-            self.navigationController?.popToRootViewController(animated: true)
+            self.delegatePop?.notifyNeedPopHabitDetailsViewController()
             self.dismiss(animated: true)
         }
         alert.addAction(actionDelete)

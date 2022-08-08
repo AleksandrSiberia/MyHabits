@@ -33,7 +33,6 @@ class DatesTableViewCell: UITableViewCell {
         self.addSubview(labelDate)
         self.addSubview(imageViewTracked)
         setupConstraints()
-
     }
 
     required init?(coder: NSCoder) {
@@ -60,7 +59,6 @@ class DatesTableViewCell: UITableViewCell {
         self.labelDate.text = stringDate
 
         let dateTrackedTrueFalse = HabitsStore.shared.habit(HabitsStore.shared.habits[number], isTrackedIn: date)
-
 
         if dateTrackedTrueFalse == true {
             imageViewTracked.isHidden = false

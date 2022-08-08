@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol HabitDetailsViewControllerDelegate {
+    func notifyNeedPopHabitDetailsViewController()
+}
+
 class HabitDetailsViewController: UIViewController {
 
     private var indexHabitInArray: Int?
@@ -43,11 +47,6 @@ class HabitDetailsViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = barButtonRight
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.backgroundColor = UIColor(named: "customGrey")
-    }
-
 
     func setupHabitDetailsViewController(indexPith: IndexPath) {
 
@@ -77,14 +76,16 @@ class HabitDetailsViewController: UIViewController {
     @objc func actionBarButtonRight() {
         let habitViewController = HabitViewController()
 
-        self.navigationController?.pushViewController(habitViewController, animated: true)
+        habitViewController.delegatePop = self
+
+        let navHabitViewController = UINavigationController(rootViewController: habitViewController)
+
+        self.present(navHabitViewController, animated: true)
 
         habitViewController.setupHabitViewController(habit: HabitsStore.shared.habits[indexHabitInArray!], indexHabit: indexHabitInArray!)
-
-
-
     }
 }
+
 
 extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource {
 
@@ -109,5 +110,13 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         40
+    }
+}
+
+
+extension HabitDetailsViewController: HabitDetailsViewControllerDelegate {
+
+    func notifyNeedPopHabitDetailsViewController() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

@@ -9,9 +9,11 @@ import UIKit
 
 class HabitCollectionViewCell: UICollectionViewCell {
 
+    var delegateReload: HabitsViewControllerDelegate?
+
+    var delegateWidth: ProgressCollectionViewCellDelegate?
 
     private var indexHabitInArray: Int?
-
 
     private lazy var colorBackgroundViewTrack: UIColor = {
         var colorBackgroundViewTrack = UIColor()
@@ -89,8 +91,6 @@ class HabitCollectionViewCell: UICollectionViewCell {
         self.viewTrack.addSubview(self.imageCheckMark)
         setupConstrains()
         setupGestureRecogniser()
-
-       
     }
 
     required init?(coder: NSCoder) {
@@ -170,11 +170,14 @@ class HabitCollectionViewCell: UICollectionViewCell {
         self.viewTrack.backgroundColor = self.colorBackgroundViewTrack
         self.imageCheckMark.isHidden = false
 
+        self.delegateWidth?.notifyNeedNewWidthViewColorProgress()
+
+        self.delegateReload?.notifyNeedReloadCollectionView()
     }
 }
 
 
-extension HabitCollectionViewCell: nameCollectionCell {
+extension HabitCollectionViewCell: NameCollectionCell {
     static var nameCollectionCell: String {
         return String(describing: self)
     }
