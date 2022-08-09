@@ -13,6 +13,8 @@ protocol HabitDetailsViewControllerDelegate {
 
 class HabitDetailsViewController: UIViewController {
 
+    var progressCell: ProgressCollectionViewCell?
+
     private var indexHabitInArray: Int?
 
     private var nameHabit: String?
@@ -79,6 +81,8 @@ class HabitDetailsViewController: UIViewController {
         habitViewController.delegatePop = self
 
         let navHabitViewController = UINavigationController(rootViewController: habitViewController)
+
+        habitViewController.delegateWidth = self.progressCell
 
         self.present(navHabitViewController, animated: true)
 

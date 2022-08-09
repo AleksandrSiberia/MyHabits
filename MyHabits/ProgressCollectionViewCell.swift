@@ -110,9 +110,9 @@ extension ProgressCollectionViewCell: NameCollectionCell {
 extension ProgressCollectionViewCell: ProgressCollectionViewCellDelegate {
 
     func notifyNeedNewWidthViewColorProgress() {
+
         let widthViewProgress = UIScreen.main.bounds.width - 14 - 14 - 14 - 14
         let widthViewColorProgress = widthViewProgress * CGFloat(HabitsStore.shared.todayProgress)
-
         self.viewColorProgress.frame.size.width = widthViewColorProgress
 
     }

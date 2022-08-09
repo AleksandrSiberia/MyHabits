@@ -115,8 +115,6 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
         let cell = collectionViewHabits.dequeueReusableCell(withReuseIdentifier: ProgressCollectionViewCell.nameCollectionCell, for: indexPath)
         cell.layer.cornerRadius = 10
         self.progressCell = (cell as! ProgressCollectionViewCell)
-
-
         return cell
 
     }
@@ -130,8 +128,6 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenWidth = UIScreen.main.bounds.width
         let widthItem = screenWidth - flowLayoutCollectionViewHabits.sectionInset.left - flowLayoutCollectionViewHabits.sectionInset.right
-
-
         guard indexPath.row != 0 else {
             return CGSize(width: widthItem, height: 77)
         }
@@ -145,6 +141,8 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
             let habitDetailsViewController = HabitDetailsViewController()
             habitDetailsViewController.setupHabitDetailsViewController(indexPith: indexPath)
+
+            habitDetailsViewController.progressCell = self.progressCell
 
             self.navigationController?.pushViewController(habitDetailsViewController, animated: true)
         }

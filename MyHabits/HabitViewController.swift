@@ -252,10 +252,14 @@ class HabitViewController: UIViewController {
 
         let actionDelete = UIAlertAction(title: "Удалить", style: .destructive) { _ in
             HabitsStore.shared.habits.remove(at: self.indexHabitInArray!)
+
+            self.delegateWidth?.notifyNeedNewWidthViewColorProgress()
+            
             self.delegatePop?.notifyNeedPopHabitDetailsViewController()
             self.dismiss(animated: true)
         }
         alert.addAction(actionDelete)
+
         present(alert, animated: true)
     }
 }
