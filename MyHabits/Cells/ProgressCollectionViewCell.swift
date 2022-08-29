@@ -80,12 +80,15 @@ class ProgressCollectionViewCell: UICollectionViewCell {
 
     private func setupConstraints() {
 
+        let width = (UIScreen.main.bounds.width - 14 - 14 - 14 - 14) * 0.2
+
         NSLayoutConstraint.activate([
             self.labelMotivation.topAnchor.constraint(equalTo: self.topAnchor, constant: 14),
             self.labelMotivation.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 14),
 
             self.labelPrecent.centerYAnchor.constraint(equalTo: self.labelMotivation.centerYAnchor),
             self.labelPrecent.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -14),
+            self.labelPrecent.widthAnchor.constraint(equalToConstant: width),
 
             self.viewProgress.topAnchor.constraint(equalTo: self.labelMotivation.bottomAnchor, constant: 14),
             self.viewProgress.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 14),
@@ -94,8 +97,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
 
             self.viewColorProgress.topAnchor.constraint(equalTo: self.viewProgress.topAnchor),
             self.viewColorProgress.leadingAnchor.constraint(equalTo: self.viewProgress.leadingAnchor),
-            self.viewColorProgress.bottomAnchor.constraint(equalTo: self.viewProgress.bottomAnchor),
-
+            self.viewColorProgress.bottomAnchor.constraint(equalTo: self.viewProgress.bottomAnchor)
         ])
     }
 }

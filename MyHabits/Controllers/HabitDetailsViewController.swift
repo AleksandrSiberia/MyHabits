@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol HabitDetailsViewControllerDelegate {
+protocol HabitDetailsViewControllerIsADelegate {
     func notifyNeedPopHabitDetailsViewController()
 }
 
@@ -118,7 +118,7 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 
-extension HabitDetailsViewController: HabitDetailsViewControllerDelegate {
+extension HabitDetailsViewController: HabitDetailsViewControllerIsADelegate {
 
     func notifyNeedPopHabitDetailsViewController() {
         self.navigationController?.popViewController(animated: true)

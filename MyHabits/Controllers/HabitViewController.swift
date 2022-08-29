@@ -14,7 +14,7 @@ class HabitViewController: UIViewController {
 
     var delegateReload: HabitsViewControllerDelegate?
 
-    var delegatePop: HabitDetailsViewControllerDelegate?
+    var delegatePop: HabitDetailsViewControllerIsADelegate?
 
     var delegateWidth: ProgressCollectionViewCellDelegate?
 
@@ -226,8 +226,8 @@ class HabitViewController: UIViewController {
         editedHabit.name = self.textFieldNameNewHabit.text!
         }
         HabitsStore.shared.habits.insert(editedHabit, at: indexHabitInArray!)
-        
-        self.navigationController?.popViewController(animated: true)
+
+        self.dismiss(animated: true)
     }
 
 
