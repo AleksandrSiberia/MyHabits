@@ -43,6 +43,8 @@ class HabitDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.backgroundColor = .white
         self.view.backgroundColor = UIColor(named: "customGrey" )
         [labelActivity, tableViewDate].forEach({ self.view.addSubview($0) })
         setupConstraints()

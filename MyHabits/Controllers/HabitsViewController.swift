@@ -51,6 +51,8 @@ class HabitsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = UIColor.createColorForTheme(lightTheme: .white, darkTheme: .black)
+
         self.view.backgroundColor = .systemBackground
         [labelToday, collectionViewHabits].forEach({ self.view.addSubview($0) })
         setupConstraints()
@@ -105,6 +107,9 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
         guard indexPath.row == 0 else {
             let cell = collectionViewHabits.dequeueReusableCell(withReuseIdentifier: HabitCollectionViewCell.nameCollectionCell, for: indexPath) as! HabitCollectionViewCell
+
+            cell.backgroundColor =  UIColor.createColorForTheme(lightTheme: .white, darkTheme: .black)
+
             cell.layer.cornerRadius = 10
             cell.setupContent(HabitsStore.shared.habits[indexPath.item - 1], indexPath: indexPath)
             cell.delegateReload = self
@@ -114,6 +119,9 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout, UICollection
 
         let cell = collectionViewHabits.dequeueReusableCell(withReuseIdentifier: ProgressCollectionViewCell.nameCollectionCell, for: indexPath)
         cell.layer.cornerRadius = 10
+
+        cell.backgroundColor =  UIColor.createColorForTheme(lightTheme: .white, darkTheme: .black)
+
         self.progressCell = (cell as! ProgressCollectionViewCell)
         return cell
 

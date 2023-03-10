@@ -99,6 +99,7 @@ class HabitViewController: UIViewController {
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.datePickerMode = .time
         datePicker.addTarget(self, action: #selector(actionDatePicker), for: .valueChanged)
+        
         return datePicker
     }()
 
@@ -115,7 +116,9 @@ class HabitViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+
+        view.backgroundColor = UIColor.createColorForTheme(lightTheme: .white, darkTheme: .black)
+        
         self.navigationController?.navigationBar.backgroundColor = .systemGray6
         self.navigationItem.title = self.titleNavigationItem
         [labelNameHabit, textFieldNameNewHabit, labelColor, colorView, labelDate, labelEveryday, datePicker, buttonDelateHabit].forEach({ self.view.addSubview($0) })
